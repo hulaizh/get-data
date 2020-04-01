@@ -1,0 +1,75 @@
+# Mac
+.DS_Store
+_DS_Store
+*~*
+
+
+# Folders
+audit/
+output/
+input/
+temp/
+
+# Stata
+*.smcl
+*.txt
+
+# Python
+**.ipynb_checkpoints
+**__pycache__
+.scrapy
+profile_default/
+ipython_config.py
+
+
+# R
+.Rhistory
+.Rapp.history
+.RData
+packrat/lib*/
+.Rproj.user/
+*_cache/
+/cache/
+**/rbin/
+**/raw/
+
+
+# Latex
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.pdf
+*-final.lyx
+
+# **/externals/
+# *RData
+# *pdf
+# **/audit
+# **/output
+# **/zip
+# *csv
+# *xlsx
+# *log
+# **/html*
+# **scratch
+# **html
+# *.Rhistory
+# **/exports
+# **zip
+# keys.txt
+
