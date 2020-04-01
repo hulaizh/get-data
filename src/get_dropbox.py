@@ -9,7 +9,7 @@ def get_from_dropbox(url, destination):
         URL = url.replace('dl=0', 'dl=1')
     else:
         URL = False
-        print('File link is wrong! Please copy the right link.')
+        print('False link! Please copy the right link.')
 
     if URL:
         response = urllib.request.urlopen(url)
