@@ -8,8 +8,8 @@ def get_from_dropbox(url, destination):
     elif url.endswith('dl=0'):
         URL = url.replace('dl=0', 'dl=1')
     else:
-        URL = False
         print('False link! Please copy the right link.')
+        raise Exception
 
     if URL:
         response = urllib.request.urlopen(url)

@@ -30,7 +30,8 @@ def get_confirm_token(response):
         if key.startswith('download_warning'):
             return value
         else:
-            return False
+            print('False link! Please copy the right link.')
+            raise Exception
 
 
 if __name__ == "__main__":

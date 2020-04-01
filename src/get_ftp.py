@@ -1,5 +1,5 @@
 import ftplib
-import os
+# import os
 
 
 def get_from_ftp(agent, path, filename=None, destination=''):
