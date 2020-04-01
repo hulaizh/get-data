@@ -1,41 +1,39 @@
 import requests
-# import os
-# import argparse
 
 
-def get_from_google_drive(id, destination):
-    URL = "https://docs.google.com/uc?export=download"
+def get_from_googledrive(url, destination):
+    idx = url.find('id=')
+    id = url[idx + 3:]
+
+    URL = 'https://docs.google.com/uc?export=download'
 
     session = requests.Session()
 
     response = session.get(URL, params={'id': id}, stream=True)
+
     token = get_confirm_token(response)
 
     if token:
         params = {'id': id, 'confirm': token}
         response = session.get(URL, params=params, stream=True)
 
-    save_response_content(response, destination)
+    CHUNK_SIZE = 32768
+
+    with open(destination, 'wb') as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk:  # filter out keep-alive new chunks
+                f.write(chunk)
 
 
 def get_confirm_token(response):
     for key, value in response.cookies.items():
         if key.startswith('download_warning'):
             return value
-
-    return None
-
-
-def save_response_content(response, destination):
-    CHUNK_SIZE = 32768
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(CHUNK_SIZE):
-            if chunk:  # filter out keep-alive new chunks
-                f.write(chunk)
+        else:
+            return False
 
 
 if __name__ == "__main__":
-    file_id = '14cdKEQYaxw8q69-_pbM3F_gsK84eD9N0'
+    url = 'https://drive.google.com/open?id=14cdKEQYaxw8q69-_pbM3F_gsK84eD9N0'
     destination = '../output/google_sample.csv'
-    get_from_google_drive(file_id, destination)
+    get_from_googledrive(url, destination)
