@@ -5,10 +5,14 @@ _DS_Store
 
 
 # Folders
-audit/
-output/
-input/
-temp/
+**/audit/
+**/input/
+**/output/
+data/
+gen/
+**/temp/
+.idea
+
 
 # Stata
 *.smcl
