@@ -5,7 +5,7 @@ import zipfile
 
 def main():
     # connect to dropbox with token
-    token_file = 'src/token.txt'
+    token_file = 'token.txt'
     token = {}
     with open(token_file) as f:
         for line in f:
@@ -23,7 +23,7 @@ def main():
     # folder
     zip_name = dbx_path.split('/')[-1] + '.zip'
     zip_file = os.path.join(local_path, zip_name)
-    print('Downloading: ' + dbx_path)
+    print('Downloading to {}: '.format(local_path) + dbx_path)
     dbx.files_download_zip_to_file(zip_file, dbx_path)
     # unzip the zipped folder
     print('Unzipping: ' + zip_name)
@@ -35,7 +35,7 @@ def main():
     for f in file_names:
         local_file = os.path.join(local_path, f)
         dbx_file = os.path.join(dbx_path, f)
-        print('Downloading: ' + f)
+        print('Downloading to {}: '.format(local_path) + f)
         dbx.files_download_to_file(local_file, dbx_file)
 
 
