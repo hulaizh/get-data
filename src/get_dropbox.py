@@ -1,26 +1,37 @@
-import urllib.request
+import dropbox
+import os
 
 
-def get_from_dropbox(url, destination):
+def main():
+    # connect to dropbox with token
+    token_file = 'src/token.txt'
+    token = {}
+    with open(token_file) as f:
+        for line in f:
+            (key, val) = line.split(':')
+            token[key] = val
+    dbx_token = token['dropbox'].strip()
+    dbx = dropbox.Dropbox(dbx_token)
 
-    if url.endswith('dl=1'):
-        URL = url
-    elif url.endswith('dl=0'):
-        URL = url.replace('dl=0', 'dl=1')
-    else:
-        print('False link! Please copy the right link.')
-        raise Exception
+    # download dbx folder and files
+    dbx_path = '/sharing'
+    local_path = '/Users/hulai/Desktop'
+    # all files to be downloaded
+    file_names = ['Bryan  Everett.xlsx', 'Bryan  Everett.dta']
 
-    if URL:
-        response = urllib.request.urlopen(url)
-        data = response.read()
-        response.close()
+    # folder
+    zip_name = dbx_path.split('/')[-1] + '.zip'
+    zip_file = os.path.join(local_path, zip_name)
+    print('Downloading: ' + dbx_path)
+    dbx.files_download_zip_to_file(zip_file, dbx_path)
 
-        with open(destination, 'wb') as f:
-            f.write(data)
+    # file
+    for f in file_names:
+        local_file = os.path.join(local_path, f)
+        dbx_file = os.path.join(dbx_path, f)
+        print('Downloading: ' + f)
+        dbx.files_download_to_file(local_file, dbx_file)
 
 
-if __name__ == "__main__":
-    url = "https://www.dropbox.com/s/221s9p8p8fap61x/Bryan%20%20Everett.xlsx?dl=0"
-    destination = '../output/dropbox_sample.csv'
-    get_from_dropbox(url, destination)
+if __name__ == '__main__':
+    main()
