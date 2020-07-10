@@ -1,5 +1,6 @@
 import dropbox
 import os
+import zipfile
 
 
 def main():
@@ -24,6 +25,11 @@ def main():
     zip_file = os.path.join(local_path, zip_name)
     print('Downloading: ' + dbx_path)
     dbx.files_download_zip_to_file(zip_file, dbx_path)
+    # unzip the zipped folder
+    print('Unzipping: ' + zip_name)
+    with zipfile.ZipFile(zip_file, "r") as zip_ref:
+        zip_ref.extractall(local_path)
+    os.remove(zip_file)
 
     # file
     for f in file_names:
