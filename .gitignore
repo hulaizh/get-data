@@ -21,7 +21,11 @@ gen/
 profile_default/
 ipython_config.py
 
+# data file
+*.xlsx
+*.data
+*.csv
+
 # token file
-token.txt
-credentials.json
-client_secrets.json
+*.txt
+*.json
